@@ -1,0 +1,141 @@
+[gd_scene load_steps=18 format=3 uid="uid://diugsr52nfy21"]
+
+[ext_resource type="Texture2D" uid="uid://2itsh2ixdpa7" path="res://assets/city.jpg" id="1_eost2"]
+[ext_resource type="Script" path="res://scripts/Environment.gd" id="1_wnxf2"]
+[ext_resource type="Texture2D" uid="uid://dyeeoyxxc6lay" path="res://assets/madera.webp" id="2_drxel"]
+[ext_resource type="PackedScene" uid="uid://cdo3wnnhj4rht" path="res://scenes/VR_Player.tscn" id="2_elbji"]
+[ext_resource type="AudioStream" uid="uid://b836mlj38rfs1" path="res://assets/bg.mp3" id="4_86qtr"]
+[ext_resource type="Texture2D" uid="uid://l5aw6tgdigon" path="res://assets/bandera.jpg" id="4_jp340"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_t85ld"]
+panorama = ExtResource("1_eost2")
+
+[sub_resource type="Sky" id="Sky_024jg"]
+sky_material = SubResource("PanoramaSkyMaterial_t85ld")
+
+[sub_resource type="Environment" id="Environment_4fwcu"]
+background_mode = 2
+sky = SubResource("Sky_024jg")
+sky_custom_fov = 120.0
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ynvh7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2nlx"]
+albedo_color = Color(0.0475577, 0.0475576, 0.0475576, 1)
+roughness = 0.1
+anisotropy = 0.97
+uv1_scale = Vector3(40, 40, 40)
+
+[sub_resource type="Gradient" id="Gradient_8iypk"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oijea"]
+gradient = SubResource("Gradient_8iypk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5nuk"]
+albedo_texture = ExtResource("2_drxel")
+albedo_texture_force_srgb = true
+rim_texture = SubResource("GradientTexture1D_oijea")
+uv1_scale = Vector3(4, 4, 4)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bxfwv"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_qk26g"]
+size = Vector2(17, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hb18"]
+albedo_texture = ExtResource("4_jp340")
+
+[node name="Environment" type="Node3D"]
+script = ExtResource("1_wnxf2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4fwcu")
+
+[node name="LightmapGI" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.626186, 0.774727, 0.0876891, -0.695146, 0.503824, 0.512769, 0.353076, -0.382046, 0.854036, -36.079, 113.874, 26.9712)
+shadow_enabled = true
+directional_shadow_mode = 0
+
+[node name="Map" type="Node" parent="."]
+
+[node name="Edificio1" type="CSGMesh3D" parent="Map"]
+transform = Transform3D(20, 0, 0, 0, 100, 0, 0, 0, 20, 0, 50, 0)
+use_collision = true
+mesh = SubResource("BoxMesh_ynvh7")
+material = SubResource("StandardMaterial3D_u2nlx")
+
+[node name="Edificio2" type="CSGMesh3D" parent="Map"]
+transform = Transform3D(20, 0, 0, 0, 100, 0, 0, 0, 20, -75, 50, 0)
+use_collision = true
+mesh = SubResource("BoxMesh_ynvh7")
+material = SubResource("StandardMaterial3D_u2nlx")
+
+[node name="Puente1" type="CSGMesh3D" parent="Map"]
+transform = Transform3D(20, 0, 0, 0, 0.5, 0, 0, 0, 1, -19.516, 99.8806, 4.69532)
+use_collision = true
+mesh = SubResource("BoxMesh_ynvh7")
+material = SubResource("StandardMaterial3D_o5nuk")
+
+[node name="Puente2" type="CSGMesh3D" parent="Map"]
+transform = Transform3D(-4.37114e-07, 0, -1, 0, 0.5, 0, 10, 0, -4.37114e-08, -29.0332, 99.8806, -0.81042)
+use_collision = true
+mesh = SubResource("BoxMesh_ynvh7")
+material = SubResource("StandardMaterial3D_o5nuk")
+
+[node name="Puente3" type="CSGMesh3D" parent="Map"]
+transform = Transform3D(5, 0, 0, 0, 0.5, 0, 0, 0, 1, -32.0296, 99.8806, -5.32075)
+use_collision = true
+mesh = SubResource("BoxMesh_ynvh7")
+material = SubResource("StandardMaterial3D_o5nuk")
+
+[node name="Puente4" type="CSGMesh3D" parent="Map"]
+transform = Transform3D(-4.37114e-07, 0, -1, 0, 0.5, 0, 10, 0, -4.37114e-08, -35.0267, 99.8806, -0.81042)
+use_collision = true
+mesh = SubResource("BoxMesh_ynvh7")
+material = SubResource("StandardMaterial3D_o5nuk")
+
+[node name="Puente5" type="CSGMesh3D" parent="Map"]
+transform = Transform3D(15, 0, 0, 0, 0.5, 0, 0, 0, 1, -42.0345, 99.8806, 4.68287)
+use_collision = true
+mesh = SubResource("BoxMesh_ynvh7")
+material = SubResource("StandardMaterial3D_o5nuk")
+
+[node name="Puente6" type="CSGMesh3D" parent="Map"]
+transform = Transform3D(-1.31134e-07, 0, -1, 0, 0.5, 0, 3, 0, -4.37114e-08, -50.024, 99.8806, 5.69207)
+use_collision = true
+mesh = SubResource("BoxMesh_ynvh7")
+material = SubResource("StandardMaterial3D_o5nuk")
+
+[node name="Puente7" type="CSGMesh3D" parent="Map"]
+transform = Transform3D(15, 0, 0, 0, 0.5, 0, 0, 0, 1, -58.0235, 99.8806, 6.67881)
+use_collision = true
+mesh = SubResource("BoxMesh_ynvh7")
+material = SubResource("StandardMaterial3D_o5nuk")
+
+[node name="Palo1" type="CSGMesh3D" parent="Map"]
+transform = Transform3D(0.3, 0, 0, 0, 4, 0, 0, 0, 0.3, -67.2345, 101.354, 9.15789)
+use_collision = true
+mesh = SubResource("CylinderMesh_bxfwv")
+
+[node name="Palo2" type="CSGMesh3D" parent="Map"]
+transform = Transform3D(0.3, 0, 0, 0, 4, 0, 0, 0, 0.3, -67.2345, 101.354, 4.16677)
+use_collision = true
+mesh = SubResource("CylinderMesh_bxfwv")
+
+[node name="Bandera" type="CSGMesh3D" parent="Map"]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 4, 0, -0.3, 0, -1.31134e-08, -67.2345, 104.225, 6.6598)
+use_collision = true
+mesh = SubResource("QuadMesh_qk26g")
+material = SubResource("StandardMaterial3D_8hb18")
+
+[node name="Player" parent="." instance=ExtResource("2_elbji")]
+transform = Transform3D(1.19249e-08, 0, 1, 0, 1, 0, -1, 0, 1.19249e-08, -0.738223, 101.005, 0.852602)
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_86qtr")
+autoplay = true
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
